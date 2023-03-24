@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FormPage extends BasePage {
+public class AutomationPracticeFormPage extends BasePage {
 
     @FindBy(css = "#inputFirstName3")
     private WebElement firstNameInput;
@@ -40,7 +40,7 @@ public class FormPage extends BasePage {
     @FindBy(id = "validator-message")
     private WebElement validatorMessageLabel;
 
-    public FormPage(WebDriver driver) {
+    public AutomationPracticeFormPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
@@ -49,75 +49,90 @@ public class FormPage extends BasePage {
     }
 
 
-    public void attachFileByPath(String path) {
+    public AutomationPracticeFormPage attachFileByPath(String path) {
         attachFileButton.sendKeys(path);
+        return this;
     }
 
-    public void selectContinents(String continentValue) {
+    public AutomationPracticeFormPage selectContinents(String continentValue) {
         selectByValue(selectContinents, continentValue);
+        return this;
     }
 
-    public void selectRandomProfession() {
+    public AutomationPracticeFormPage selectRandomProfession() {
         WebElement randomProfession = WebPageUtils.getRandomElement(professionCheckBoxes);
         randomProfession.click();
+        return this;
     }
 
-    public void selectSelectSeleniumCommands(String value) {
+    public AutomationPracticeFormPage selectSelectSeleniumCommands(String value) {
         selectByValue(selectSeleniumCommands, value);
+        return this;
     }
 
-    public void selectRandomContinent() {
+    public AutomationPracticeFormPage selectRandomContinent() {
         Object randomObjectFromList = ArithmeticUtils.getRandomObjectFromList(
                 Arrays.stream(Continents.values()).collect(Collectors.toList()));
         selectContinents(((Continents) randomObjectFromList).getValue());
+        return this;
     }
 
-    public void selectRandomYearsOfExperience() {
+    public AutomationPracticeFormPage selectRandomYearsOfExperience() {
         WebPageUtils.getRandomElement(yearsOfExperienceRadio).click();
+        return this;
     }
 
     //genders
-    public void setFirstName(String firstName) {
+    public AutomationPracticeFormPage setFirstName(String firstName) {
         firstNameInput.sendKeys(firstName);
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public AutomationPracticeFormPage setLastName(String lastName) {
         lastNameInput.sendKeys(lastName);
+        return this;
     }
 
-    public void setEmail(String email) {
+    public AutomationPracticeFormPage setEmail(String email) {
         emailInput.sendKeys(email);
+        return this;
     }
 
-    public void setAge(int age) {
+    public AutomationPracticeFormPage setAge(int age) {
         ageInput.sendKeys(String.valueOf(age));
+        return this;
     }
 
     public String getValidationMsgLabel() {
         return validatorMessageLabel.getText();
     }
 
-    public void pickRandomGender() {
+    public AutomationPracticeFormPage pickRandomGender() {
         WebPageUtils.getRandomElement(gendersRadio).click();
+        return this;
     }
 
-    public void selectGender(Genders genders) {
+    public AutomationPracticeFormPage selectGender(Genders genders) {
         switch (genders) {
             case MALE -> selectMale();
             case FEMALE -> selectFemale();
             default -> selectOther();
         }
+        return this;
     }
 
-    private void selectOther() {
+    private AutomationPracticeFormPage selectOther() {
         gendersRadio.get(Genders.OTHER.getNumber()).click();
+        return this;
     }
 
-    private void selectFemale() {
+    private AutomationPracticeFormPage selectFemale() {
         gendersRadio.get(Genders.FEMALE.getNumber()).click();
+        return this;
     }
 
-    public void selectMale() {
+    public AutomationPracticeFormPage selectMale() {
         gendersRadio.get(Genders.MALE.getNumber()).click();
+        return this;
     }
 }
